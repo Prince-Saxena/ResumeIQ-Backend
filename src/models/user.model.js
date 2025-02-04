@@ -6,51 +6,60 @@ const userSchema = new Schema(
 	{
 		username: {
 			type: String,
-			require: true,
+			required: true,
 			unique: true,
-			lowcase: true,
+			lowercase: true,
 			trim: true,
 		},
 		email: {
 			type: String,
-			require: true,
+			required: true,
 			unique: true,
-			lowcase: true,
+			lowercase: true,
 			trim: true,
 		},
 		fullname: {
 			type: String,
-			require: true,
+			required: true,
 			trim: true,
 		},
 		resume: [
 			{
-				type: Schema.Type.ObjectId,
-				ref: "Resume",
+				title: { type: String, trim: true,required:true },
+				publicId: { type: String, required: true, trim: true },
 			},
 		],
 		password: {
 			type: String,
-			require: [true, "Password is require!"],
+			required: [true, "Password is required!"],
 		},
 	},
 	{ timestamps: true }
 );
 
+// Pre-save hook for password hashing
 userSchema.pre("save", async function (next) {
-	if (!this.isModified("password")) return next();
-	this.password = await bcrypt.hash(this.password, 10);
+	try {
+		if (!this.isModified("password")) return next();
+		this.password = await bcrypt.hash(this.password, 10);
+		next();
+	} catch (err) {
+		next(err);
+	}
 });
 
+// Method to verify password
 userSchema.methods.isPasswordCorrect = async function (password) {
 	return await bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.genAccessToken = async function () {
-	jwt.sign(
+// Method to generate access token
+userSchema.methods.genAccessToken = function () {
+	return jwt.sign(
 		{
 			_id: this._id,
 			username: this.username,
+			fullname: this.fullname,
 		},
 		process.env.ACCESS_TOKEN_SECRET,
 		{
