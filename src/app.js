@@ -33,6 +33,10 @@ app.use(e.urlencoded({ extended: true, limit: "16kb" }));
 app.use(e.static("public"));
 app.use(cookieParser());
 
+app.get("/hello", (req, res) => {
+	res.send("Hello");
+});
+
 import userRouter from "./routes/user.routes.js";
 import resumeRouter from "./routes/resume.routes.js";
 import summaryRouter from "./routes/suggestions.routes.js";
