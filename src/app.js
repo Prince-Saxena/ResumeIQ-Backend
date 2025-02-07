@@ -24,7 +24,7 @@ app.use(
 				return callback(new Error("CORS not allowed"), false);
 			}
 		},
-		credentials: true, // Allow cookies to be sent
+		credentials: true, 
 	})
 );
 
@@ -33,7 +33,7 @@ app.use(e.urlencoded({ extended: true, limit: "16kb" }));
 app.use(e.static("public"));
 app.use(cookieParser());
 
-app.get("/hello", (req, res) => {
+app.get("/", (req, res) => {
 	res.send("Hello");
 });
 
@@ -44,28 +44,5 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/resume", resumeRouter);
 app.use("/api/v1/gen", summaryRouter);
 
-// app.post("/api/v1/upload", upload.single("file"), async (req, res) => {
-// 	try {
-// 		if (!req.file) {
-// 			return res.status(400).json({ message: "No file uploaded" });
-// 		}
-
-// 		// Call Cloudinary upload
-// 		const response = await uploadOnCloudinary(req.file.path);
-
-// 		// Clean up the uploaded file after uploading to Cloudinary
-// 		fs.unlink(req.file.path, (err) => {
-// 			if (err) console.error("Error deleting file:", err);
-// 		});
-
-// 		if (response) {
-// 			res.status(200).json({ message: "File uploaded successfully", data: response });
-// 		} else {
-// 			res.status(500).json({ message: "Error uploading file to Cloudinary" });
-// 		}
-// 	} catch (error) {
-// 		res.status(500).json({ message: "Error during file upload", error });
-// 	}
-// });
 
 export { app };

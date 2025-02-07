@@ -1,16 +1,6 @@
 import path from "path";
 import fs from "fs";
-import multer from "multer";
-
-// Derive __dirname using import.meta.url
-// const __dirname = path.dirname(new URL(import.meta.url).pathname);
-
-// // Correct the path to avoid leading backslashes
-// const tempDir = path.resolve(__dirname, "..", "..", "..", "Backend", "public", "temp");
-
-// // Ensure the directory exists
-// if (!fs.existsSync(tempDir)) {
-// 	fs.mkdirSync(tempDir, { recursive: true });
+import multer from "multer";irSync(tempDir, { recursive: true });
 // }
 
 const storage = multer.diskStorage({
