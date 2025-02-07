@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 config();
-import { app } from "./app.js";
-import connectDB from "./DB/index.js";
+import { app } from "./src/app.js";
+import connectDB from "./src/DB/index.js";
 
 connectDB()
 	.then(() => {
