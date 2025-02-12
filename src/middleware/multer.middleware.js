@@ -1,7 +1,6 @@
 import path from "path";
 import fs from "fs";
-import multer from "multer";irSync(tempDir, { recursive: true });
-// }
+import multer from "multer";
 
 const storage = multer.diskStorage({
 	// destination: function (req, file, cb) {

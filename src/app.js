@@ -33,13 +33,15 @@ app.use(e.urlencoded({ extended: true, limit: "16kb" }));
 app.use(e.static("public"));
 app.use(cookieParser());
 
-app.get("/", (req, res) => {
-	res.send("Hello");
-});
+
 
 import userRouter from "./routes/user.routes.js";
 import resumeRouter from "./routes/resume.routes.js";
 import summaryRouter from "./routes/suggestions.routes.js";
+
+app.get("/favicon.ico", (req, res) => {
+	res.status(204).end(); // Send an empty response with 204 No Content
+});
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/resume", resumeRouter);
 app.use("/api/v1/gen", summaryRouter);

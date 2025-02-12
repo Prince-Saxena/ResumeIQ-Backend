@@ -3,6 +3,10 @@ config();
 import { app } from "./src/app.js";
 import connectDB from "./src/DB/index.js";
 
+app.get("/", (req, res) => {
+	res.send("Hello");
+});
+
 connectDB()
 	.then(() => {
 		app.listen(process.env.PORT || 8000, () => {
