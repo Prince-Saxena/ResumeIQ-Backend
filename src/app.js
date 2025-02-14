@@ -8,9 +8,8 @@ const app = e();
 // List of allowed origins
 const allowedOrigins = [
 	"http://localhost:5173", // Frontend URL (React app)
-	"http://127.0.0.1:5500", // Another possible frontend URL
-	"https://your-production-domain.com", // Add your production domain
-	"https://prince-saxena.github.io/Test/#/",
+	"http://127.0.0.1:5500", 
+	"https://prince-saxena.github.io/ResumeIQ/#/",
 ];
 
 // CORS configuration to allow multiple origins
@@ -40,7 +39,7 @@ import resumeRouter from "./routes/resume.routes.js";
 import summaryRouter from "./routes/suggestions.routes.js";
 
 app.get("/favicon.ico", (req, res) => {
-	res.status(204).end(); // Send an empty response with 204 No Content
+	res.status(204).end(); 
 });
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/resume", resumeRouter);

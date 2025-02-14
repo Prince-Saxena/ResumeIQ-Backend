@@ -71,10 +71,11 @@ const loginUser = asyncHandler(async (req, res) => {
 	const loggedInUser = await User.findById(user._id).select("-password");
 
 	const options = {
-		// httpOnly: true,
+		httpOnly: true,
 		secure: true,
-		sameSite: "lax",
+		sameSite: "none",
 		path: "/",
+		domain: "resume-iq-backend.vercel.app",
 	};
 
 	res.cookie("accessToken", accessToken, options);
@@ -97,6 +98,8 @@ const logoutUser = asyncHandler(async (req, res) => {
 		.clearCookie("accessToken", options)
 		.json(new ApiResponse(200, {}, "User logged out!"));
 });
+
+export { registerUser, loginUser, logoutUser };
 
 // const uploadResume = async (req, res) => {
 // 	try {
@@ -130,4 +133,3 @@ const logoutUser = asyncHandler(async (req, res) => {
 // 	}
 // };
 
-export { registerUser, loginUser, logoutUser };

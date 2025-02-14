@@ -4,7 +4,7 @@ import { app } from "./src/app.js";
 import connectDB from "./src/DB/index.js";
 
 app.get("/", (req, res) => {
-	res.send("Hello");
+	res.send("Working fine!");
 });
 
 connectDB()
